@@ -1,0 +1,22 @@
+# -------------------------------
+# Set secure permissions
+# -------------------------------
+
+# Ensure ownership
+RUN chown -R tomcat:tomcat /usr/local/tomcat/webapps
+
+# 1. SureScripts/downloads → rw- for tomcat only
+RUN chmod 700 /usr/local/tomcat/webapps/SureScripts/downloads && \
+    find /usr/local/tomcat/webapps/SureScripts/downloads -type f -exec chmod 600 {} \;
+
+# 2. pharmacyhub/certificates → r-- for tomcat only
+RUN chmod 500 /usr/local/tomcat/webapps/pharmacyhub/certificates && \
+    find /usr/local/tomcat/webapps/pharmacyhub/certificates -type f -exec chmod 400 {} \;
+
+# 3. pharmacyhub/logs → rw- for tomcat only
+RUN chmod 700 /usr/local/tomcat/webapps/pharmacyhub/logs && \
+    find /usr/local/tomcat/webapps/pharmacyhub/logs -type f -exec chmod 600 {} \;
+
+# 4. pharmacyhub app root → r-- for tomcat only (including classes, static, etc.)
+RUN chmod 500 /usr/local/tomcat/webapps/pharmacyhub && \
+    find /usr/local/tomcat/webapps/pharmacyhub -type f -exec chmod 400 {} \;
