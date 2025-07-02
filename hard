@@ -14,3 +14,22 @@ find /usr/local/tomcat/logs /usr/local/tomcat/work /usr/local/tomcat/temp -type 
 
 # Step 3: Block deletion of these folders by removing write permission on parent dir
 chmod 500 /usr/local/tomcat
+
+
+
+# Create Logs + Archived Folders and Secure Permissions
+# -----------------------------------------------------------------------------
+RUN mkdir -p /usr/local/tomcat/webapps/epahub/logs/archived && \
+    touch /usr/local/tomcat/webapps/epahub/logs/epahub.log && \
+\
+    # Ownership to 'tomcat' user
+    chown -R tomcat:tomcat /usr/local/tomcat/webapps/epahub/logs && \
+\
+    # logs directory (rwx for tomcat only)
+    chmod 700 /usr/local/tomcat/webapps/epahub/logs && \
+\
+    # epahub.log file (read/write only for tomcat)
+    chmod 600 /usr/local/tomcat/webapps/epahub/logs/epahub.log && \
+\
+    # archived folder (allow tomcat to move files into it)
+    chmod 700 /usr/local/tomcat/webapps/epahub/logs/archived
