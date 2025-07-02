@@ -1,1 +1,16 @@
-scf
+# Step 1: Set ownership to tomcat
+chown -R tomcat:tomcat /usr/local/tomcat/logs /usr/local/tomcat/work /usr/local/tomcat/temp
+
+# Step 2: Set restrictive permissions
+
+# Give tomcat user full access (rwx), and no access to group/others
+chmod 700 /usr/local/tomcat/logs /usr/local/tomcat/work /usr/local/tomcat/temp
+
+# All files inside: read & write for tomcat only, no access for group/others
+find /usr/local/tomcat/logs /usr/local/tomcat/work /usr/local/tomcat/temp -type f -exec chmod 600 {} \;
+
+# All subdirectories inside: full access only for tomcat
+find /usr/local/tomcat/logs /usr/local/tomcat/work /usr/local/tomcat/temp -type d -exec chmod 700 {} \;
+
+# Step 3: Block deletion of these folders by removing write permission on parent dir
+chmod 500 /usr/local/tomcat
