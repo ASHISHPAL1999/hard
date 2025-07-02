@@ -33,3 +33,7 @@ RUN mkdir -p /usr/local/tomcat/webapps/epahub/logs/archived && \
 \
     # archived folder (allow tomcat to move files into it)
     chmod 700 /usr/local/tomcat/webapps/epahub/logs/archived
+
+
+
+catalina.2025-07-02.log  host-manager.2025-07-02.log  localhost.2025-07-02.log  localhost_access_log.2025-07-02.txt  manager.2025-07-02.log
