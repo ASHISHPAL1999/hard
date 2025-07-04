@@ -19,20 +19,20 @@ chmod 500 /usr/local/tomcat
 
 # Create Logs + Archived Folders and Secure Permissions
 # -----------------------------------------------------------------------------
-RUN mkdir -p /usr/local/tomcat/webapps/epahub/logs/archived && \
-    touch /usr/local/tomcat/webapps/epahub/logs/epahub.log && \
+RUN mkdir -p /usr/local/tomcat/webapps/hub/logs/archived && \
+    touch /usr/local/tomcat/webapps/hub/logs/epahub.log && \
 \
     # Ownership to 'tomcat' user
-    chown -R tomcat:tomcat /usr/local/tomcat/webapps/epahub/logs && \
+    chown -R tomcat:tomcat /usr/local/tomcat/webapps/hub/logs && \
 \
     # logs directory (rwx for tomcat only)
-    chmod 700 /usr/local/tomcat/webapps/epahub/logs && \
+    chmod 700 /usr/local/tomcat/webapps/logs && \
 \
     # epahub.log file (read/write only for tomcat)
-    chmod 600 /usr/local/tomcat/webapps/epahub/logs/epahub.log && \
+    chmod 600 /usr/local/tomcat/webapps/logs/epahub.log && \
 \
     # archived folder (allow tomcat to move files into it)
-    chmod 700 /usr/local/tomcat/webapps/epahub/logs/archived
+    chmod 700 /usr/local/tomcat/webapps/logs/archived
 
 
 
